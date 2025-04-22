@@ -8,9 +8,45 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>My Library</h1>
+
+    
     <div class="container">
         
+        <div class="tile" id="abc">
+            <div class="name">Mai Hu Gunjan</div>
+            <div class="author">Gunjan</div>
+            <div class="pages">0</div>
+            <div class="status">Yet to read</div>
+        </div>
+
+        <div class="tile" id="ac">
+            <div class="name">Mai Hu Gunjan</div>
+            <div class="author">Gunjan</div>
+            <div class="pages">0</div>
+            <div class="status">Yet to read</div>
+        </div>
     </div>
+
+    <button class="addnew">New Book</button>
+    <dialog class="addbook">
+        <form class="addbookform" method="dialog">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name">
+
+            <label for="author">Author name</label>
+            <input type="text" id="author" name="author">
+
+            <label for="pages">Number of pages</label>
+            <input type="number" id="pages" name="pages">
+
+            <label for="read">Read</label>
+            <input type="radio" id="yes" value="yes" name="read">Yes</input>
+            <input type="radio" id="no" value="no" name="read">No</input>
+
+            <button id="addbutton">Add Book</button>
+        </form>
+    </dialog>
     
 </body>
 </html>

@@ -6,7 +6,7 @@ function Book(id,name,author,pages,status) {
     this.name=name;
     this.author=author;
     this.pages=pages;
-    if(status){
+    if(status=='yes'){
         this.status="read";
     }
 
@@ -17,21 +17,16 @@ function Book(id,name,author,pages,status) {
 }
 
 //Function to add a new book object into the array
-function bookArray() {
-    let name;
-    let author;
-    let pages;
-    let status;
+function bookArray(name,author,pages,status) {
     let id=self.crypto.randomUUID();
-
     let newBook=new Book(id,name,author,pages,status);
     arrayBook.push(newBook);
 }
 
 //Function to display all the books in arrayBook
 function display() {
-    for (let i = 0; i < arrayBook.length; i++) {
-        let book = arrayBook[i];
+    //for (let i = 0; i < arrayBook.length; i++) {
+        let book = arrayBook[arrayBook.length-1];
         let tile=document.createElement('div');
         tile.classList.add('tile');
         tile.setAttribute('id',book.id);
@@ -53,6 +48,32 @@ function display() {
         status.textContent=`Status: ${book.status}`;
 
         tile.append(name,author,pages,status);
+        let container=document.querySelector('.container');
+        container.appendChild(tile);
         
-    }
+   // }
 }
+
+const newBook=document.querySelector(".addnew")
+const dialog=document.querySelector("dialog")
+newBook.addEventListener("click",()=>{
+    dialog.showModal();
+})
+
+const addbtn= document.querySelector("#addbutton")
+addbtn.addEventListener('click',(e)=>{
+    e.preventDefault()
+    const form=document.querySelector("form");
+    let name=form.querySelector('#name').value;
+    //console.log(name)
+    let author=form.querySelector('#author').value;
+    let pages=form.querySelector('#pages').value;
+    let status=form.querySelector('input[name=read]:checked').value;
+    console.log(status)
+    bookArray(name,author,pages,status);
+    form.reset()
+    display();
+    dialog.close();
+
+
+})
