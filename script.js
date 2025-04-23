@@ -21,6 +21,7 @@ function bookArray(name,author,pages,status) {
     let id=self.crypto.randomUUID();
     let newBook=new Book(id,name,author,pages,status);
     arrayBook.push(newBook);
+    display();
 }
 
 //Function to display all the books in arrayBook
@@ -47,11 +48,30 @@ function display() {
         status.classList.add('status');
         status.textContent=`Status: ${book.status}`;
 
-        tile.append(name,author,pages,status);
+        let deleteButton=document.createElement('button');
+        deleteButton.classList.add('delete')
+        deleteButton.textContent="Delete"
+        deleteButton.addEventListener('click',(e)=>{
+            const parentElement=e.target.parentElement;
+            let bookId = parentElement.getAttribute('id');
+            let index = arrayBook.findIndex((book) => {
+                return book.id === bookId;
+            });
+
+            //console.log(index)
+            arrayBook.splice(index,1)
+            parentElement.remove();
+        })
+
+        let toggle=document.createElement('button')
+        toggle.classList.add('toggle')
+        toggle.textContent="Read"
+
+        tile.append(name,author,pages,status,deleteButton,toggle);
         let container=document.querySelector('.container');
         container.appendChild(tile);
         
-   // }
+    //}
 }
 
 const newBook=document.querySelector(".addnew")
@@ -72,8 +92,9 @@ addbtn.addEventListener('click',(e)=>{
     console.log(status)
     bookArray(name,author,pages,status);
     form.reset()
-    display();
     dialog.close();
 
 
 })
+
+bookArray('No Longer Human','Osamu Dazai','176')
